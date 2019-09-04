@@ -1,5 +1,9 @@
 plugins {
-    java
+    application
+}
+
+application {
+    mainClassName = "marsrover.Main"
 }
 
 java {
@@ -19,6 +23,16 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = application.mainClassName
+    }
+}
+
+tasks.withType<JavaExec> {
+    standardInput = System.`in`
 }
 
 repositories {
